@@ -1,23 +1,19 @@
-function zero(i = 0) {
-  return function () {
-    return i++;
-  };
+class Person2 {
+  name;
+  age;
+
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  // 화살표 함수로 재작성
+  getAge = () => this.age;
 }
 
-const callZero = zero();
+const kim = new Person2("kim", 20);
 
-console.log(callZero());
-console.log(callZero());
-console.log(callZero());
+kimAge = kim.getAge;
 
-function addNum(num) {
-  return function () {
-    return num++;
-  };
-}
-
-const calladdNum = addNum(10);
-
-console.log(calladdNum());
-console.log(calladdNum());
-console.log(calladdNum());
+console.log(kim.age); // 20
+console.log(kimAge()); // 20

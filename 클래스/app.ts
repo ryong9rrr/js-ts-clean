@@ -13,7 +13,8 @@ interface Container {
 abstract class Shape {
   /*
     static: 인스턴스 객체를 생성할 때 필요하지 않은,
-    이 Shape이라는 클래스에 기본적으로 포함할 그런 속성 값을 의미함.
+    이 Shape이라는 클래스에 기본적으로 포함할 그런 속성 값을 의미함,
+    static을 붙여주게 되면 해당 클래스 안에서 this가 아닌 클래스명으로 접근가능하다.
     */
   public static MIN_BORDER_WIDTH = 0;
   public static MAX_BORDER_WIDTH = 30;
@@ -21,12 +22,13 @@ abstract class Shape {
   // readonly: 인스턴스 객체가 만들어진 이후 바꿀 수 없는 속성
   public readonly name: string = "Shape";
   /*
-  속성 접근자 public, protected, private
-  public은 언제 어디서나~
-  private은 그 클래스 안에서만 통용됨, 상속하거나 상속돼도
-  부모, 자식클래스에서 보이지 않음. 물론 인스턴스 외부에도 X
-  protected는 확장된(상속된) 클래스까지는 보임.
-  하지만 인스턴스 외부에서는 보이지 않음.
+  <속성 접근자 public, protected, private>
+  1. public은 언제 어디서나~ (외부 공개 O, 상속 O)
+  2. protected는 확장된(상속된) 클래스까지는 보임.
+  하지만 인스턴스 외부에서는 보이지 않음. (외부 공개 O, 상속 X)
+  3. private은 그 클래스 안에서만 통용됨, 상속하거나 상속돼도
+  부모, 자식클래스에서 보이지 않음. 물론 인스턴스 외부에도 X (외부 공개 X, 상속 X)
+  범위 : private < protected < public
   */
   protected _borderWidth: number;
   // !는 옵셔널(선택사항)이 아니라 값을 세팅하지 않아도 된다는 뜻
@@ -36,7 +38,7 @@ abstract class Shape {
     this._borderWidth = borderWidth;
   }
 
-  // abstract: 상속된 하위 클래스는 area를 구현해라,
+  // abstract: 상속된 하위 클래스는 area를 구현해라. (abstract 해놓고 만약 구현안하면 ts 컴파일 에러!)
   // 그래서 타입만 명시되어있음을 알 수 있음.
   abstract area: () => number;
 
